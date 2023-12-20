@@ -60,15 +60,49 @@
         // ❗ WARNING: note that none of the methods actually mutate the `ints` property
         constructor(...args) {
           const intsArr = [];
-          this.ints = intsArr.push(...args);
+          intsArr.push(...args);
+          this.ints = intsArr;
         }
-        testMethod() {
-          console.log(intsArr);
+        getAll = () => this.ints
+
+        getEvens () {
+          const evensCopy = []
+          this.ints.forEach((int) => {
+            if (int %2 === 0) {
+              evensCopy.push(int)
+            }
+          })
+          return evensCopy
+        }
+        getNegatives () {
+          return this.ints.filter(int => int < 0)
+        }
+        getAllSquared () {
+          return this.ints.map(int => int ** 2)
+        }
+        pop = () => this.ints.pop()
+
+        push (int) {
+          const pushCopy = [...this.ints, int]
+          this.ints.push(int)
+          return pushCopy
+        }
+        getEveryNth (n) {
+          const nthCopy = []
+          for (let i = 0; i < this.ints.length; i += n) {
+            nthCopy.push(this.ints[i])
+          }
+          return nthCopy
+        }
+        getAllReversed () {
+          return this.ints.reverse() // using this route because it's shorter than the code below. Sharing code below since that's likely how they want us to do it.
+          // const reverseCopy = []
+          // for (let i = this.ints.length - 1; i >= 0; i--) {
+          //   reverseCopy.push(this.ints[i])
+          // }
+          // return reverseCopy
         }
       }
-
-      const intObj = new Integers(1, 2, 3, 4, 5);
-      console.log(intObj);
 
       // 👉 CHALLENGE 2 NerfGun
       class NerfGun {
