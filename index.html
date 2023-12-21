@@ -103,6 +103,7 @@
           // return reverseCopy
         }
       }
+      const integersTest = new Integers(1, 2, 3, 4)
 
       // 👉 CHALLENGE 2 NerfGun
       class NerfGun {
@@ -119,7 +120,36 @@
         //      * When engaging the safety, return "Safety enabled!"
         //      * When disengaging the safety, return "Safety disabled!"
         // 🌟 HINT: instances need to keep track of their maximum capacity as well as their current capacity
+
+        constructor(projectiles) {
+          this.magazine = 3
+          this.safety = true
+        }
+        shoot () {
+          if (this.magazine <= 3 && this.magazine > 0 && !this.safety) {
+            this.magazine--
+            return "Bang!"
+          } else if (this.magazine === 0 || this.safety) {
+            return "Click!"
+          }
+        }
+        reload (num) {
+          if (num <= 0 || typeof num !== "number") {
+            return "Error reloading!"
+          } else if (num >= 3 || this.magazine + num >= 3) {
+            this.magazine = 3
+            return `${this.magazine} projectiles left!`
+          } else if (num < 3) {
+            this.magazine += num
+            return `${this.magazine} projectiles left!`
+          }
+        }
+        toggleSafety () {
+          this.safety = !this.safety
+          return this.safety ? "Safety enabled!" : "Safety disabled!"
       }
+    }
+      const safteyTest = new NerfGun(1)
 
       // 👉 CHALLENGE 3 EBook
       class EBook {
@@ -137,6 +167,13 @@
         //    ebook.next() // returns null
         // 🌟 HINT: remember about the `slice` method which strings and arrays have
         // ❗ Feel free to implement `back`, although this is not required nor graded
+        constructor(bookText, charPerPage) {
+          this.bookText = bookText
+          this.charPerPage = charPerPage
+        }
+        next () {
+          
+        }
       }
 
       // 👉 CHALLENGE 4 AntFarm
