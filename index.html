@@ -170,11 +170,22 @@
         constructor(bookText, charPerPage) {
           this.bookText = bookText
           this.charPerPage = charPerPage
+          this.currentPage = 0
         }
         next () {
-          
+          let begin = this.currentPage * this.charPerPage
+          let stop = begin + this.charPerPage
+
+          if (begin >= this.bookText.length) {
+            return null
+          }
+          const nextPage = this.bookText.slice(begin, stop)
+          this.currentPage++
+
+          return nextPage
         }
       }
+      // const neweBook = new EBook("adslkja", 2)
 
       // 👉 CHALLENGE 4 AntFarm
       class AntFarm {
