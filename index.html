@@ -232,8 +232,10 @@
         }
         work() {
           for (let i = 0; i < this.ants.length; i++) {
+            if (this.ants[i].health > 0) {
             this.ants[i].health = this.ants[i].health - 20
           }
+        }
           this.ants = this.ants.filter(ant => ant.health > 0)
           return !this.ants.length ? "No ants here. Did you work them to death?" : `${this.ants.length} ants starting work!`
         }
