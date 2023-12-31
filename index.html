@@ -231,16 +231,18 @@
           this.ants = antsArr
         }
         work() {
-          this.ants = this.ants.filter(ant => ant.health > 0)
+          if (this.ants.length === 0) {
+            return "No ants here. Did you work them to death?";
+          }
           this.ants = this.ants.map(ant => {
-            ant.health = ant.health - 20
-            return ant
-          })
-
-          return this.ants.length <= 0 ? "No ants here. Did you work them to death?" : `${this.ants.length} ants starting work!`
+            ant.health -= 20;
+            return ant;
+          });
+          this.ants = this.ants.filter(ant => ant.health > 0);
+          return `${this.ants.length} ants starting work!`;
         }
         feed(name) {
-
+          
         }
       }
 
