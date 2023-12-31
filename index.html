@@ -221,28 +221,39 @@
         //      and with the piece of mind of all tests passing, refactor to use map/filter
 
         constructor(...antNames) {
-          const antsArr = [];
-          for (let i = 0; i < antNames.length; i++) {
-            const antObj = {}
-            antObj.name = antNames[i]
-            antObj.health = 100
-            antsArr.push(antObj)
-          }
-          this.ants = antsArr
+          this.ants = antNames.map(name => ({name, health: 100})) // a better way to do it.
+          // const antsArr = []; // my original route, below.
+          // for (let i = 0; i < antNames.length; i++) {
+          //   const antObj = {}
+          //   antObj.name = antNames[i]
+          //   antObj.health = 100
+          //   antsArr.push(antObj)
+          // }
+          // this.ants = antsArr
         }
         work() {
           if (this.ants.length === 0) {
             return "No ants here. Did you work them to death?";
           }
+          let antCount = this.ants.length
+
           this.ants = this.ants.map(ant => {
             ant.health -= 20;
             return ant;
           });
           this.ants = this.ants.filter(ant => ant.health > 0);
-          return `${this.ants.length} ants starting work!`;
+          return `${antCount} ants starting work!`;
         }
-        feed(name) {
-          
+        feed(antToFeed) {
+          if (this.ants.filter(ant => ant.name === antToFeed)) {
+            this.ants = this.ants.map(ant => {
+              if (ant.name === antToFeed) {
+              ant.health += 15
+              }
+              return ant
+            })
+          }
+          return this.ants.find(ant => ant.name === antToFeed) ? "Yum!" : `${antToFeed} not found!`
         }
       }
 
